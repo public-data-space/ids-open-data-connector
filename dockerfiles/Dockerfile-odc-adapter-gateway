@@ -1,0 +1,8 @@
+FROM maven:3.6.0-jdk-11-slim
+WORKDIR /home/app/
+COPY odc-adapter-gateway/src ./src
+COPY odc-adapter-gateway/pom.xml ./
+COPY settings.xml /root/.m2/settings.xml
+RUN mvn -f ./pom.xml clean package
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","./target/odc-adapter-gateway-1.0-SNAPSHOT-fat.jar"]

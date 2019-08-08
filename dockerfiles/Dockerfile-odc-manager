@@ -1,0 +1,8 @@
+FROM maven:3.6.0-jdk-11-slim AS build
+WORKDIR /home/app/
+COPY odc-manager/src ./src
+COPY odc-manager/pom.xml ./
+COPY settings.xml /root/.m2/settings.xml
+RUN mvn -f ./pom.xml clean package
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","./target/odc-manager-1.0-SNAPSHOT-fat.jar"]

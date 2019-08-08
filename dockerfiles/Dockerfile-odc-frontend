@@ -1,0 +1,9 @@
+FROM node:12.7-alpine
+WORKDIR /home/app/
+COPY odc-frontend/package.json ./
+RUN npm install
+COPY odc-frontend/babel.config.js ./
+COPY odc-frontend/.env ./
+COPY odc-frontend/src/ ./src
+EXPOSE 8080
+ENTRYPOINT [ "npm", "run", "serve" ]

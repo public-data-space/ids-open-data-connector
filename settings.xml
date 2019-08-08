@@ -1,0 +1,42 @@
+<settings xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.1.0 http://maven.apache.org/xsd/settings-1.1.0.xsd"
+  xmlns="http://maven.apache.org/SETTINGS/1.1.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <mirrors>
+    <mirror>
+      <id>paca</id>
+      <url>https://paca.okd.fokus.fraunhofer.de/repository/maven-public</url>
+      <mirrorOf>central</mirrorOf>
+    </mirror>
+  </mirrors>
+
+  <servers>
+    <server>
+      <id>paca</id>
+    </server>
+    <server>
+      <id>isst-repo</id>
+      <username>IDSRepoUser</username>
+      <password>IDSRepoUserPW</password>
+    </server>
+  </servers>
+
+  <profiles>
+    <profile>
+      <id>paca</id>
+      <repositories>
+        <repository>
+          <id>public</id>
+          <url>https://paca.okd.fokus.fraunhofer.de/repository/maven-public/</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>paca</activeProfile>
+  </activeProfiles>
+
+</settings>
