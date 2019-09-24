@@ -1,0 +1,33 @@
+version: '3.5'
+services:
+  odc-adapter-ckan:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-adapter-ckan
+    image: ckan
+
+  odc-adapter-postgres:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-adapter-postgres
+    image: postgresql
+
+  odc-config-manager:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-config-manager
+
+  odc-adapter-gateway:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-adapter-gateway
+
+  odc-manager:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-manager
+
+  odc-frontend:
+    build:
+      context: ./
+      dockerfile: dockerfiles/Dockerfile-odc-frontend
