@@ -18,7 +18,7 @@ This is the Repository collecting all files to conveniently boot an instance of 
 * Frontend is available at localhost:8080
 * Username: *admin* Password: *admin*
 
-* New DataSource adapters can be registered by POST request to localhost:8091, i.e. for CKAN and postgresql:
+* New DataSource adapters can be registered by POST request to localhost:8091/register, i.e. for CKAN and postgresql:
 ```json
 {
     "name":"CKAN",
