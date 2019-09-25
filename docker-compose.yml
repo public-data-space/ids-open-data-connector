@@ -26,6 +26,7 @@ services:
       dockerfile: dockerfiles/Dockerfile-odc-config-manager
     volumes:
       - odc-config-manager_repo:/ids/repo
+      - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8091:8080
     environment:
@@ -64,7 +65,7 @@ services:
     links:
       - odc-adapter-gateway
     ports:
-      - 8090:8090
+      - 8090:8080
     environment:
       - HOST=db
       - PORT=5432
