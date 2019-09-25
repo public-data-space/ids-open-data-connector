@@ -16,3 +16,9 @@
 [submodule "odc-config-manager"]
 	path = odc-config-manager
 	url = git@gitlab.fokus.fraunhofer.de:ids/odc-config-manager.git
+[submodule "odc-adapter-eurostat"]
+	path = odc-adapter-eurostat
+	url = git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-eurostat.git
+[submodule "odc-adapter-dwd"]
+	path = odc-adapter-dwd
+	url = git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-dwd.git
