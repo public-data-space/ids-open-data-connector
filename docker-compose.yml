@@ -7,8 +7,8 @@ services:
     volumes:
       - odc-adapter-ckan_repo:/ids/repo
     environment:
-      - DB_URL=/ids/repo/db
       - REPOSITORY=/ids/repo
+      - SERVICE_PORT=8080
 
   odc-adapter-postgres:
     build:
@@ -17,7 +17,8 @@ services:
     volumes:
       - odc-adapter-postgres_repo:/ids/repo
     environment:
-      - DB_URL=/ids/repo/db
+      - REPOSITORY=/ids/repo
+      - SERVICE_PORT=8080
 
   odc-config-manager:
     build:
@@ -28,8 +29,9 @@ services:
     ports:
       - 8091:8080
     environment:
-      - DB_URL=/ids/repo/db
+      - REPOSITORY=/ids/repo/
       - INIT=true
+      - SERVICE_PORT=8080
 
   odc-adapter-gateway:
     build:
@@ -42,6 +44,7 @@ services:
     environment:
       - CONFIG_MANAGER_URL=odc-config-manager
       - CONFIG_MANAGER_PORT=8080
+      - SERVICE_PORT=8080
 
   db:
     image: postgres
@@ -73,6 +76,7 @@ services:
       - GATEWAY_HOST=odc-adapter-gateway
       - GATEWAY_PORT=8080
       - INIT=true
+      - SERVICE_PORT=8080
 
   odc-frontend:
     build:
