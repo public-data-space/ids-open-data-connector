@@ -9,14 +9,16 @@ This is the Repository collecting all files to conveniently boot an instance of 
 
 * Insert ISST IDS-Lab credentials into settings.xml
 
-* docker-compose up
-
 ## Usage
+
+### Usage without the apps
+
+* docker-compose up
 
 * Frontend is available at localhost:8080
 * Username: *admin* Password: *admin*
 
-* New DataSource adapters can be registered by POST request to localhost:8091, i.e. for CKAN and postgresql:
+* New DataSource adapters can be registered by POST request to localhost:8091/register, i.e. for CKAN and postgresql:
 ```json
 {
     "name":"CKAN",
@@ -35,6 +37,14 @@ This is the Repository collecting all files to conveniently boot an instance of 
     }
 }
 ```
+
+### Usage with apps demo showcase
+
+* docker-compose -f docker-compose_build.yml build
+* docker-compose -f docker-compose_up.yml up
+
+* Go to *Apps*
+* Start postgres and/or ckan app
 
 ## Registering a Data Asset
 * Register a DataSource via *Hinzufügen*
