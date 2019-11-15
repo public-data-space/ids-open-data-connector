@@ -1,29 +1,37 @@
-version: '3.1'
+version: '3.5'
 services:
   odc-adapter-ckan:
-    build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-adapter-ckan
+    build: ./odc-adapter-ckan
+    image: ckan
     volumes:
       - odc-adapter-ckan_repo:/ids/repo
+    depends_on:
+      - odc-config-manager
     environment:
       - REPOSITORY=/ids/repo
-      - SERVICE_PORT=8080
+      - CONFIG_MANAGER_PORT=8080
+      - CONFIG_MANAGER_HOST=odc-config-manager
+      - ROUTE_ALIAS=odc-adapter-ckan
+    networks:
+      - ids_connector
 
   odc-adapter-postgres:
-    build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-adapter-postgres
+    build: ./odc-adapter-postgres
+    image: postgresql
     volumes:
       - odc-adapter-postgres_repo:/ids/repo
+    depends_on:
+      - odc-config-manager
     environment:
       - REPOSITORY=/ids/repo
-      - SERVICE_PORT=8080
+      - CONFIG_MANAGER_PORT=8080
+      - CONFIG_MANAGER_HOST=odc-config-manager
+      - ROUTE_ALIAS=odc-adapter-postgres
+    networks:
+      - ids_connector
 
   odc-config-manager:
-    build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-config-manager
+    build: ./odc-config-manager
     volumes:
       - odc-config-manager_repo:/ids/repo
       - /var/run/docker.sock:/var/run/docker.sock
@@ -33,37 +41,34 @@ services:
       - REPOSITORY=/ids/repo/
       - INIT=true
       - SERVICE_PORT=8080
+    networks:
+      - ids_connector
 
   odc-adapter-gateway:
-    build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-adapter-gateway
-    links:
-      - odc-config-manager
-      - odc-adapter-ckan
-      - odc-adapter-postgres
+    build: ./odc-adapter-gateway
     environment:
       - CONFIG_MANAGER_URL=odc-config-manager
       - CONFIG_MANAGER_PORT=8080
       - SERVICE_PORT=8080
+    networks:
+      - ids_connector
 
   db:
-    image: postgres
+    image: postgres:11
     volumes:
       - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - odc-manager-database:/var/lib/postgresql/data
     environment:
       - DATABASE_USER=ids
       - DATABASE_USER_PW=ids
+    networks:
+      - ids_connector
+    ports:
+      - 5433:5432
 
   odc-manager:
     build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-manager
-    depends_on:
-      - db
-    links:
-      - odc-adapter-gateway
+      context: ./odc-manager
     ports:
       - 8090:8080
     environment:
@@ -78,11 +83,11 @@ services:
       - GATEWAY_PORT=8080
       - INIT=true
       - SERVICE_PORT=8080
+    networks:
+      - ids_connector
 
   odc-frontend:
-    build:
-      context: ./
-      dockerfile: dockerfiles/Dockerfile-odc-frontend
+    build: ./odc-frontend
     ports:
       - 8080:8080
 
@@ -92,3 +97,7 @@ volumes:
   odc-config-manager_repo:
   odc-manager-database:
   odc_adapter_ckan_tmp:
+
+networks:
+  ids_connector:
+    name: ids_connector

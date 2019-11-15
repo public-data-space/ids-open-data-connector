@@ -1,8 +1,0 @@
-FROM maven:3.6.0-jdk-11-slim
-WORKDIR /home/app/
-COPY odc-adapter-postgres/src ./src
-COPY odc-adapter-postgres/pom.xml ./
-COPY settings.xml /root/.m2/settings.xml
-RUN mvn -f ./pom.xml clean package
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","./target/odc-adapter-postgres-1.0-SNAPSHOT-fat.jar"]
