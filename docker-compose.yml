@@ -67,8 +67,7 @@ services:
       - 5433:5432
 
   odc-manager:
-    build:
-      context: ./odc-manager
+    build: ./odc-manager
     ports:
       - 8090:8080
     environment:
@@ -96,7 +95,6 @@ volumes:
   odc-adapter-postgres_repo:
   odc-config-manager_repo:
   odc-manager-database:
-  odc_adapter_ckan_tmp:
 
 networks:
   ids_connector:
