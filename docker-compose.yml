@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   odc-adapter-ckan:
-    build: ./odc-adapter-ckan
+    build: ./adapters/odc-adapter-ckan
     image: ckan
     volumes:
       - odc-adapter-ckan_repo:/ids/repo
@@ -16,7 +16,7 @@ services:
       - ids_connector
 
   odc-adapter-postgres:
-    build: ./odc-adapter-postgres
+    build: ./adapters/odc-adapter-postgres
     image: postgresql
     volumes:
       - odc-adapter-postgres_repo:/ids/repo
@@ -31,7 +31,7 @@ services:
       - ids_connector
 
   odc-config-manager:
-    build: ./odc-config-manager
+    build: ./backend/odc-config-manager
     volumes:
       - odc-config-manager_repo:/ids/repo
       - /var/run/docker.sock:/var/run/docker.sock
@@ -45,7 +45,7 @@ services:
       - ids_connector
 
   odc-adapter-gateway:
-    build: ./odc-adapter-gateway
+    build: ./backend/odc-adapter-gateway
     environment:
       - CONFIG_MANAGER_URL=odc-config-manager
       - CONFIG_MANAGER_PORT=8080
@@ -56,7 +56,7 @@ services:
   db:
     image: postgres:11
     volumes:
-      - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./backend/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - odc-manager-database:/var/lib/postgresql/data
     environment:
       - DATABASE_USER=ids
@@ -67,7 +67,7 @@ services:
       - 5433:5432
 
   odc-manager:
-    build: ./odc-manager
+    build: ./backend/odc-manager
     ports:
       - 8090:8080
     environment:
@@ -86,7 +86,7 @@ services:
       - ids_connector
 
   odc-frontend:
-    build: ./odc-frontend
+    build: ./frontend/odc-frontend
     ports:
       - 8080:8080
 

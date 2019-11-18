@@ -1,53 +1,45 @@
 # IDS Open Data Connector
 
-This is the Repository collecting all files to conveniently boot an instance of the IDS Open Data Connector via docker-compose.
+This is the Repository collecting setup files to conveniently boot an instance of the IDS Open Data Connector via docker-compose.
+
+##Requirements
+* git
+* docker
+* docker-compose
 
 ## Setup
 * git clone
-* git submodule init
-* git submodule update
 
-* Insert ISST IDS-Lab credentials into settings.xml
+## Starting the connector
 
-## Usage
+### Using the startup script
+Run ```./startup.sh```
 
-### Usage without the apps
+### Manually running docker-compose
+```
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-postgres.git ./adapters/odc-adapter-postgres
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-ckan.git ./adapters/odc-adapter-ckan
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-config-manager.git ./backend/odc-config-manager
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-gateway.git ./backend/odc-adapter-gateway
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-manager.git ./backend/odc-manager
+git clone git@gitlab.fokus.fraunhofer.de:ids/odc-frontend.git ./frontend/odc-frontend
+docker-compose up -d
+```
 
-* docker-compose up
-
+### Usage
 * Frontend is available at localhost:8080
 * Username: *admin* Password: *admin*
-
-* New DataSource adapters can be registered by POST request to localhost:8091/register, i.e. for CKAN and postgresql:
-```json
-{
-    "name":"CKAN",
-    "address":{
-        "host":"odc-adapter-ckan",
-        "port":8080
-    }
-}
-```
-```json
-{
-    "name":"POSTGRESQL",
-    "address":{
-        "host":"odc-adapter-postgres",
-        "port":8080
-    }
-}
-```
-
-### Usage with apps demo showcase
-
-* docker-compose -f docker-compose_build.yml build
-* docker-compose -f docker-compose_up.yml up
-
-* Go to *Apps*
-* Start postgres and/or ckan app
+* Enter connector configuration via *Konfiguration* first
 
 ## Registering a Data Asset
 * Register a DataSource via *Hinzufügen*
 * Example CKAN instance is available at http://ids-backend.fokus.fraunhofer.de/api/3/action
 * Click on the registered DataSource and enter the prompted information
 * Example CKAN resource ID: b7325acb-02a0-4d19-9a13-f5f917036a1e
+
+## Registering to a broker
+* Register the connector at a broker via *Brokers*
+
+## Managing Apps
+* Apps can be started and stopped via *Apps*
+* The Apps view lists all currently available docker images on the system
