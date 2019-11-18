@@ -189,15 +189,54 @@ definitions:
         $ref: '#/definitions/DataAsset'
       filetype:
         $ref: '#/definitions/FileType'
-      
   DataAsset:
     type: "object"
     properties:
-      datasourceType:
+      datasetID:
         type: "string"
-      data:
-        type: "object"
-        additionalProperties: {}    
+      sourceID:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      url:
+        type: "string"
+      format:
+        type: "string"
+      licenseTitle:
+        type: "string"
+      datasetTitle:
+        type: "string"
+      datasetNotes:
+        type: "string"
+      orignalResourceURL:
+        type: "string"
+      orignalDatasetURL:
+        type: "string"
+      signature:
+        type: "string"
+      status:
+        $ref: '#/definitions/DataAssetStatus'
+      resourceID:
+        type: "string"
+      tags:
+        type: "array"
+        items:
+          type: "string"
+      dataSetDescription:
+        type: "string"
+      organizationTitle:
+        type: "string"
+      organizationDescription:
+        type: "string"
+      version:
+        type: "string"
+  DataAssetStatus:
+    type: "string"
+    enum: 
+    - "UNAPPROVED"
+    - "APPROVED"
+    - "PUBLISHED"    
       
       
       
