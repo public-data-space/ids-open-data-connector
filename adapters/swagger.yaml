@@ -1,16 +1,16 @@
 swagger: "2.0"
 info:
-  description: "IDS is a virtual dataroom for exchange and trading of data between subscribers, at the same time maintaining their sovereignty over their own data."
-  version: "1.0.0"
-  title: "IDS Industrial Data Space"
+  description: "IDS is a virtual dataroom for exchange and trading of data between subscribers, at the same time maintaining their sovereignty over their own data. This OpenAPI specification describes the endpoints of an IDS Adapter App compatible with the Open Data Connector. Developers will have to implement the described webservice endpoints for the connector to properly use the app."
+  version: "0.0.1"
+  title: "IDs Open Data Connector Adapter App"
   contact:
-    email: "email@fokus.fraunhofer.de"
+    email: "vincent.bohlen@fokus.fraunhofer.de"
   license:
     name: "No license. All rights reserved"
 host: "localhost:8080"
 tags:
 - name: "Adapter"
-  description: "All features of an adapter"
+  description: "IDS Open Data Connector adapter endpoint description"
 schemes:
 - "https"
 - "http"
@@ -19,8 +19,8 @@ paths:
     post:
       tags: 
       - "Adapter"
-      summary: "Create new DataAsset for the selected Adapter"
-      description: ""
+      summary: "Create a new Data Asset."
+      description: "The method returns an object of type DataAsset containing the metadata describing the data asset."
       operationId: "createId"
       parameters:
       - in: "body"
@@ -31,6 +31,8 @@ paths:
       responses:
         200:
           description: "DataAsset successfully created"
+          schema:
+            $ref: "#/definitions/DataAsset"
         405:
           description: "Invalid input"
   /delete:
@@ -38,7 +40,7 @@ paths:
       tags: 
       - "Adapter"
       summary: "Delete the existing DataAsset by ID"
-      description: ""
+      description: "This method deletes the app's information about a given Data Asset by the provided ID."
       operationId: "deleteId"
       parameters:
       - name: "id"
@@ -54,8 +56,8 @@ paths:
     post:
       tags: 
       - "Adapter"
-      summary: "Get file from DataAsset"
-      description: ""
+      summary: "Get File content for DataAsset."
+      description: "Returns the file contents associated with a given Data Asset."
       operationId: "getFileId"
       parameters:
       - name: "getfile"
@@ -65,7 +67,12 @@ paths:
           $ref: '#/definitions/ResourceRequest'
       responses:
         200:
-          description: "get all the content into a file with desired extension"
+          description: "File Content as String "
+          schema: 
+            type: object
+            properties:
+              result:
+                type: string
         404:
           description: "File not found"
   /supported:
@@ -73,17 +80,24 @@ paths:
       tags:
       - "Adapter"
       summary: "Return the supported data formats"
-      description: "file of dataasset can be downloaded with the supported extensions" 
+      description: "Returns a list of supported formats in which the Data Asset's content can be received."
       operationId: "supportedId"
       responses:
         200:
           description: "successful operation"
+          schema:
+            type: array
+            items:
+              type: string
+          
   /getDataAssetFormSchema:
     get:
       tags:
       - "Adapter"
       summary: "Return form schema for data asset"
-      description: "" 
+      description: "The UI generates the input form dynamically depending on the form schema delivered by the adapter App.
+       This method therefore returns a schema describing the information necessary to register a data asset. The form schema
+       is delivered in ncform format: https://github.com/ncform/ncform/blob/master/CONFIG.md#ncform-schema"
       operationId: "getDataAssetFormSchemaId"
       responses:
         200:
@@ -98,7 +112,9 @@ paths:
       tags:
       - "Adapter"
       summary: "Return form schema for data source"
-      description: "" 
+      description: "The UI generates the input form dynamically depending on the form schema delivered by the adapter App.
+      This method therefore returns a schema describing the information necessary to register a data source. The form schema
+      is delivered in ncform format: https://github.com/ncform/ncform/blob/master/CONFIG.md#ncform-schema"
       operationId: "getDataSourceFormSchemaId"
       responses:
         200:
@@ -115,6 +131,7 @@ definitions:
       data:
         type: "object"
         additionalProperties: {}
+        description: "The information used to uniquely identify and/or access a data asset in JSON format. This could be an id, a query, an URI, etc. The information is described by the data asset form schema provided by /getDataAssetFormSchema"
       sourceid:
         type: "string"
       status:
@@ -138,6 +155,7 @@ definitions:
         type: "string"
       data:
         type: "object"
+        description: "The information used to uniquely identify and/or access a data source in JSON format. This could be an URL, port, username, password, etc. The information is described by the data source form schema provided by /getDataAssetFormSchema"
         additionalProperties: {}
   DataAssetCreateMessage:
     type: "object"
@@ -168,7 +186,7 @@ definitions:
       dataresource:
         $ref: '#/definitions/DataSource'
       dataasset:
-        $ref: '#/definitions/DataSource'
+        $ref: '#/definitions/DataAsset'
       filetype:
         $ref: '#/definitions/FileType'
       
@@ -180,9 +198,6 @@ definitions:
       data:
         type: "object"
         additionalProperties: {}    
-      
-      
-      
       
       
       
