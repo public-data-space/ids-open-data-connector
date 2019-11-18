@@ -1,0 +1,226 @@
+swagger: "2.0"
+info:
+  description: "IDS is a virtual dataroom for exchange and trading of data between subscribers, at the same time maintaining their sovereignty over their own data."
+  version: "1.0.0"
+  title: "IDS Industrial Data Space"
+  contact:
+    email: "email@fokus.fraunhofer.de"
+  license:
+    name: "No license. All rights reserved"
+host: "localhost:8080"
+tags:
+- name: "Adapter"
+  description: "All features of an adapter"
+schemes:
+- "https"
+- "http"
+paths:
+  /create:
+    post:
+      tags: 
+      - "Adapter"
+      summary: "Create new DataAsset for the selected Adapter"
+      description: ""
+      operationId: "createId"
+      parameters:
+      - in: "body"
+        name: "dataasset"
+        required: true
+        schema:
+          $ref: '#/definitions/DataAssetCreateMessage'
+      responses:
+        200:
+          description: "DataAsset successfully created"
+        405:
+          description: "Invalid input"
+  /delete:
+    post:
+      tags: 
+      - "Adapter"
+      summary: "Delete the existing DataAsset by ID"
+      description: ""
+      operationId: "deleteId"
+      parameters:
+      - name: "id"
+        in: "path"
+        required : true
+        type: "integer"
+      responses:
+        200:
+          description: "DataAsset successfully deleted"
+        404:
+          description: "DataAsset not found"
+  /getFile:
+    post:
+      tags: 
+      - "Adapter"
+      summary: "Get file from DataAsset"
+      description: ""
+      operationId: "getFileId"
+      parameters:
+      - name: "getfile"
+        in: "body"
+        required: true
+        schema: 
+          $ref: '#/definitions/ResourceRequest'
+      responses:
+        200:
+          description: "get all the content into a file with desired extension"
+        404:
+          description: "File not found"
+  /supported:
+    get:
+      tags:
+      - "Adapter"
+      summary: "Return the supported data formats"
+      description: "file of dataasset can be downloaded with the supported extensions" 
+      operationId: "supportedId"
+      responses:
+        200:
+          description: "successful operation"
+  /getDataAssetFormSchema:
+    get:
+      tags:
+      - "Adapter"
+      summary: "Return form schema for data asset"
+      description: "" 
+      operationId: "getDataAssetFormSchemaId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties: {}
+        404:
+          description: "DataAsset not found"
+  /getDataSourceFormSchema:
+    get:
+      tags:
+      - "Adapter"
+      summary: "Return form schema for data source"
+      description: "" 
+      operationId: "getDataSourceFormSchemaId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "object"
+            additionalProperties: {}
+        404:
+          description: "DataAsset not found"
+definitions:
+  Job:
+    type: "object"
+    properties:
+      data:
+        type: "object"
+        additionalProperties: {}
+      sourceid:
+        type: "string"
+      status:
+        $ref: "#/definitions/JobStatus"
+      sourcetype:
+        type: "string"
+  JobStatus:
+    type: "string"
+    enum: 
+    - "CREATED"
+    - "RUNNING"
+    - "FINISHED"
+    - "ERROR"
+    default: "CREATED"
+  DataSource:
+    type: "object"
+    properties:
+      datasourceName:
+        type: "string"
+      datasourceType:
+        type: "string"
+      data:
+        type: "object"
+        additionalProperties: {}
+  DataAssetCreateMessage:
+    type: "object"
+    properties:
+      job:
+        $ref: '#/definitions/Job'
+      dataSource:
+        $ref: '#/definitions/DataSource'
+      dataassetId:
+        type: "integer"
+        format: "int64"
+      
+  FileType:
+    type: "string"
+    enum: 
+    - "JSON"
+    - "XML"
+    - "TXT"
+    - "CSV"
+    - "XSLX"
+    - "TTL"
+    - "JSONLD"
+    - "RDF"
+    - "MULTIPART"
+  ResourceRequest:
+    type: "object"
+    properties:
+      dataresource:
+        $ref: '#/definitions/DataSource'
+      dataasset:
+        $ref: '#/definitions/DataSource'
+      filetype:
+        $ref: '#/definitions/FileType'
+      
+  DataAsset:
+    type: "object"
+    properties:
+      datasourceType:
+        type: "string"
+      data:
+        type: "object"
+        additionalProperties: {}    
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    
