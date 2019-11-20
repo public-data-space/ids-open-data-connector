@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "IDS is a virtual dataroom for exchange and trading of data between subscribers, at the same time maintaining their sovereignty over their own data. This OpenAPI specification describes the endpoints of an IDS Adapter App compatible with the Open Data Connector. Developers will have to implement the described webservice endpoints for the connector to properly use the app."
+  description: "This OpenAPI specification describes the endpoints of an IDS Adapter App compatible with the Open Data Connector. Developers will have to implement the described webservice endpoints for the connector to properly use the app."
   version: "0.0.1"
   title: "IDs Open Data Connector Adapter App"
   contact:
