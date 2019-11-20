@@ -2,7 +2,7 @@
 
 This is the Repository collecting setup files to conveniently boot an instance of the IDS Open Data Connector via docker-compose.
 
-##Requirements
+## Requirements
 * git
 * docker
 * docker-compose
@@ -21,9 +21,9 @@ To start the connector manually run:
 
 ```./startup.sh [-t]``` 
 
-The -t parameter specifiies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
+The -t parameter specifies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
 
-The connector can also be started useing docker-compose up -d. However due to initialization times of containers, errors may occur. We therefore recommend using the startup script.
+The connector can also be started using docker-compose up -d. However due to initialization times of containers, errors may occur. We therefore recommend using the startup script.
 
 
 ### Usage
