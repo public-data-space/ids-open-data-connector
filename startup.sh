@@ -1,15 +1,28 @@
 #!/bin/bash
 
-#Clone adapters
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-postgres.git ./adapters/odc-adapter-postgres
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-ckan.git ./adapters/odc-adapter-ckan
+if ! [ $# -eq 0 ]; then
+  t=$1
+else
+  t=10
+fi
 
-#Clone backend
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-config-manager.git ./backend/odc-config-manager
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-gateway.git ./backend/odc-adapter-gateway
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-manager.git ./backend/odc-manager
+docker-compose up -d db
+echo "Database is initializing. Sleeping for "${t}" seconds..."
+sleep "${t}"
 
-#Clone frontend
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-frontend.git ./frontend/odc-frontend
+docker-compose up -d odc-adapter-gateway
+echo "Adapter Gateway is starting..."
 
-docker-compose up -d
+docker-compose up -d odc-config-manager
+echo "Config Manager is initializing. Sleeping for "${t}" seconds..."
+sleep "${t}"
+
+docker-compose up -d odc-adapter-postgres
+docker-compose up -d odc-adapter-ckan
+echo "Adapter apps are initializing..."
+
+docker-compose up -d odc-manager
+echo "Manager is starting..."
+
+docker-compose up -d odc-frontend
+echo "Frontend is starting..."

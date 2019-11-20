@@ -10,21 +10,21 @@ This is the Repository collecting setup files to conveniently boot an instance o
 ## Setup
 * git clone
 
+(On windows machines line endings may be problematic when used with docker. The file backend\postgres\docker-entrypoint-initdb.d\00_create_db.sh needs to use UNIX line endings.)
+
+* Run ```./setup.sh```
+
 ## Starting the connector
 
-### Using the startup script
-Run ```./startup.sh```
+The setup.sh will automatically boot the connector after setup.
+To start the connector manually run:
 
-### Manually running docker-compose
-```
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-postgres.git ./adapters/odc-adapter-postgres
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-ckan.git ./adapters/odc-adapter-ckan
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-config-manager.git ./backend/odc-config-manager
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-adapter-gateway.git ./backend/odc-adapter-gateway
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-manager.git ./backend/odc-manager
-git clone git@gitlab.fokus.fraunhofer.de:ids/odc-frontend.git ./frontend/odc-frontend
-docker-compose up -d
-```
+```./startup.sh [-t]``` 
+
+The -t parameter specifiies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
+
+The connector can also be started useing docker-compose up -d. However due to initialization times of containers, errors may occur. We therefore recommend using the startup script.
+
 
 ### Usage
 * Frontend is available at localhost:8080
