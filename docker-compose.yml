@@ -2,7 +2,7 @@ version: '3.5'
 services:
   odc-adapter-ckan:
     build: ./adapters/odc-adapter-ckan
-    image: ckan
+    image: ckan_adapter
     volumes:
       - odc-adapter-ckan_repo:/ids/repo
     depends_on:
@@ -17,7 +17,7 @@ services:
 
   odc-adapter-postgres:
     build: ./adapters/odc-adapter-postgres
-    image: postgresql
+    image: postgresql_adapter
     volumes:
       - odc-adapter-postgres_repo:/ids/repo
     depends_on:
@@ -54,7 +54,7 @@ services:
       - ids_connector
 
   db:
-    image: postgres:11
+    image: postgres
     volumes:
       - ./backend/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - odc-manager-database:/var/lib/postgresql/data
