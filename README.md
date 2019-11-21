@@ -5,7 +5,7 @@ This is the Repository collecting setup files to conveniently boot an instance o
 ## Requirements
 * git
 * docker
-* docker-compose
+* docker-compose 3.5 or higher
 
 ## Setup
 * git clone
