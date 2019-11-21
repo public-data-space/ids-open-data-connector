@@ -59,12 +59,11 @@ services:
       - ./backend/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - odc-manager-database:/var/lib/postgresql/data
     environment:
+      - POSTGRES_PASSWORD=123456
       - DATABASE_USER=ids
       - DATABASE_USER_PW=ids
     networks:
       - ids_connector
-    ports:
-      - 5433:5432
 
   odc-manager:
     build: ./backend/odc-manager
