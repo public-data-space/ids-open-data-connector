@@ -10,4 +10,4 @@ git clone https://github.com/public-data-space/odc-manager.git ./backend/odc-man
 #Clone frontend
 git clone https://github.com/public-data-space/odc-frontend.git ./frontend/odc-frontend
 
-./startup.sh
+sh startup.sh

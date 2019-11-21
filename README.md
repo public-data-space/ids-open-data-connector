@@ -22,14 +22,14 @@ https://github.com/industrial-data-space/
 (On windows machines line endings may be problematic when used with docker. The file backend\postgres\docker-entrypoint-initdb.d\00_create_db.sh needs to use UNIX line endings.)
 (The database is setup using the aforementioned script. Make sure to allow mounting of files into your docker containers. )
 
-* Run ```./setup.sh```
+* Run ```sh setup.sh```
 
 ## Starting the connector
 
 The setup.sh will automatically boot the connector after setup.
 To start the connector manually run:
 
-```./startup.sh [-t]``` 
+```sh startup.sh [-t]``` 
 
 The -t parameter specifies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
 
