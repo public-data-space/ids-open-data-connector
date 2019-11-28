@@ -10,9 +10,6 @@ docker-compose up -d db
 echo "Database is initializing. Sleeping for "${t}" seconds..."
 sleep "${t}"
 
-docker-compose up -d odc-adapter-gateway
-echo "Adapter Gateway is starting..."
-
 docker-compose up -d odc-config-manager
 echo "Config Manager is initializing. Sleeping for "${t}" seconds..."
 sleep "${t}"
