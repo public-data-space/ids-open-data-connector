@@ -68,6 +68,7 @@ services:
       - DATABASE=ids
       - USER=ids
       - PASSWORD=ids
+      - REPOSITORY=/ids/repo
       - FRONTEND_ADMIN=admin
       - FRONTEND_ADMIN_PW=admin
       - CONFIG_MANAGER_HOST=odc-config-manager
