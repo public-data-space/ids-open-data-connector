@@ -67,7 +67,7 @@ paths:
           $ref: '#/definitions/ResourceRequest'
       responses:
         200:
-          description: "File Content as String "
+          description: "The file as byte stream."
           schema: 
             type: object
             properties:
@@ -125,27 +125,6 @@ paths:
         404:
           description: "DataAsset not found"
 definitions:
-  Job:
-    type: "object"
-    properties:
-      data:
-        type: "object"
-        additionalProperties: {}
-        description: "The information used to uniquely identify and/or access a data asset in JSON format. This could be an id, a query, an URI, etc. The information is described by the data asset form schema provided by /getDataAssetFormSchema"
-      sourceid:
-        type: "string"
-      status:
-        $ref: "#/definitions/JobStatus"
-      sourcetype:
-        type: "string"
-  JobStatus:
-    type: "string"
-    enum: 
-    - "CREATED"
-    - "RUNNING"
-    - "FINISHED"
-    - "ERROR"
-    default: "CREATED"
   DataSource:
     type: "object"
     properties:
@@ -155,13 +134,15 @@ definitions:
         type: "string"
       data:
         type: "object"
-        description: "The information used to uniquely identify and/or access a data source in JSON format. This could be an URL, port, username, password, etc. The information is described by the data source form schema provided by /getDataAssetFormSchema"
+        description: "The information used to uniquely identify and/or access a data source in JSON format. This could be an URL, port, username, password, etc. The information is described by the data source form schema provided by /getDataSourceFormSchema"
         additionalProperties: {}
   DataAssetCreateMessage:
     type: "object"
     properties:
-      job:
-        $ref: '#/definitions/Job'
+      data:
+        type: "object"
+        description: "The information used to uniquely identify and/or access a data asset in JSON format. This could be an URL, ID, Query, etc. The information is described by the data source form schema provided by /getDataAssetFormSchema"
+        additionalProperties: {}
       dataSource:
         $ref: '#/definitions/DataSource'
       dataassetId:
@@ -236,45 +217,4 @@ definitions:
     enum: 
     - "UNAPPROVED"
     - "APPROVED"
-    - "PUBLISHED"    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    
+    - "PUBLISHED"
