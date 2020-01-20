@@ -8,7 +8,7 @@ services:
     depends_on:
       - odc-config-manager
     environment:
-      - REPOSITORY=/ids/repo
+      - REPOSITORY=/ids/repo/
       - CONFIG_MANAGER_PORT=8080
       - CONFIG_MANAGER_HOST=odc-config-manager
       - ROUTE_ALIAS=odc-adapter-ckan
@@ -23,7 +23,7 @@ services:
     depends_on:
       - odc-config-manager
     environment:
-      - REPOSITORY=/ids/repo
+      - REPOSITORY=/ids/repo/
       - CONFIG_MANAGER_PORT=8080
       - CONFIG_MANAGER_HOST=odc-config-manager
       - ROUTE_ALIAS=odc-adapter-postgres
@@ -43,6 +43,18 @@ services:
       - SERVICE_PORT=8080
     networks:
       - ids_connector
+      - portainer
+
+#  portainer:
+#    image: portainer/portainer
+#    ports:
+#      - 9000:9000
+#      - 8000:8000
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - portainer_data:/data
+#    networks:
+#      - portainer
 
   db:
     image: postgres
@@ -58,6 +70,8 @@ services:
 
   odc-manager:
     build: ./backend/odc-manager
+    volumes:
+      - odc-manager_repo:/ids/repo
     ports:
       - 8090:8080
     depends_on:
@@ -88,7 +102,10 @@ volumes:
   odc-adapter-postgres_repo:
   odc-config-manager_repo:
   odc-manager-database:
+  odc-manager_repo:
+  portainer_data:
 
 networks:
   ids_connector:
     name: ids_connector
+  portainer:
