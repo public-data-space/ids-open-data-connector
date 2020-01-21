@@ -41,20 +41,23 @@ services:
       - REPOSITORY=/ids/repo/
       - INIT=true
       - SERVICE_PORT=8080
+      - DOCKER_SERVICE_PORT=8080
+      - DOCKER_SERVICE_HOST=odc-service-docker
     networks:
       - ids_connector
-      - portainer
+      - ids_docker
 
-#  portainer:
-#    image: portainer/portainer
-#    ports:
-#      - 9000:9000
-#      - 8000:8000
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#      - portainer_data:/data
-#    networks:
-#      - portainer
+  odc-service-docker:
+    build: ./backend/odc-service-docker
+    volumes:
+      - odc-service-docker_repo:/ids/repo
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - REPOSITORY=/ids/repo/
+      - INIT=true
+      - SERVICE_PORT=8080
+    networks:
+      - ids_docker
 
   db:
     image: postgres
@@ -103,9 +106,10 @@ volumes:
   odc-config-manager_repo:
   odc-manager-database:
   odc-manager_repo:
-  portainer_data:
+  odc-service-docker_repo:
 
 networks:
   ids_connector:
     name: ids_connector
-  portainer:
+  ids_docker:
+    name: ids_docker
