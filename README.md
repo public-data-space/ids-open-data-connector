@@ -16,7 +16,21 @@ https://github.com/industrial-data-space/
 * docker
 * docker-compose 3.5 or higher
 
-## Setup
+## Starting the Connector
+
+### Using prebuild images (recommended)
+
+To start the connector manually run:
+
+```sh startup.sh [-t]``` 
+
+The -t parameter specifies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
+
+The connector can also be started using docker-compose up -d. However due to initialization times of containers, errors may occur. We therefore recommend using the startup script.
+
+### Building the connector from source
+
+#### Setup
 * git clone
 
 (On windows machines line endings may be problematic when used with docker. The file backend\postgres\docker-entrypoint-initdb.d\00_create_db.sh needs to use UNIX line endings.)
@@ -24,12 +38,16 @@ https://github.com/industrial-data-space/
 
 * Run ```sh setup.sh```
 
-## Starting the connector
+#### Building
+
+Follow the instructions in the readme files of the individual components project folders.
+
+#### Starting the connector
 
 The setup.sh will automatically boot the connector after setup.
 To start the connector manually run:
 
-```sh startup.sh [-t]``` 
+```sh startup.sh -f docker-compose_build.yml [-t]``` 
 
 The -t parameter specifies the wait time between initialisation of important containers. It defaults to 10 seconds, but may be lowered depending on the machine the connector is run on.
 
@@ -53,3 +71,4 @@ The connector can also be started using docker-compose up -d. However due to ini
 ## Managing Apps
 * Apps can be started and stopped via *Apps*
 * The Apps view lists all currently available docker images on the system
+* The docker service trims the urls of the prebuild images but will list locally built images as is

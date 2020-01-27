@@ -10,5 +10,3 @@ git clone https://github.com/public-data-space/odc-service-docker.git ./backend/
 
 #Clone frontend
 git clone https://github.com/public-data-space/odc-frontend.git ./frontend/odc-frontend
-
-sh startup.sh
