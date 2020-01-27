@@ -5,11 +5,13 @@ The IDS Open Data Connector is a **work in progress**. Please contribute by repo
 
 More information and related projects are available at
 
-https://www.internationaldataspaces.org/
+* https://www.internationaldataspaces.org/
 
-https://www.internationaldataspaces.org/wp-content/uploads/2019/07/Open-Data-Spaces-IDSA.pdf
+* https://www.internationaldataspaces.org/wp-content/uploads/2019/07/Open-Data-Spaces-IDSA.pdf
 
-https://github.com/industrial-data-space/
+* https://www.youtube.com/watch?v=6v-pcnAHh6A
+
+* https://github.com/industrial-data-space/
 
 ## Requirements
 * git
