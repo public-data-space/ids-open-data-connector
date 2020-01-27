@@ -61,7 +61,7 @@ The connector can also be started using docker-compose up -d. However due to ini
 * Username: *admin* Password: *admin*
 * Enter connector configuration via *Konfiguration* first
 
-##´# Registering a Data Asset
+### Registering a Data Asset
 * Register a DataSource via *Hinzufügen*
 * Example CKAN instance is available at http://ids-backend.fokus.fraunhofer.de/api/3/action
 * Click on the registered DataSource and enter the prompted information
