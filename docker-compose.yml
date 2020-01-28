@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   odc-adapter-ckan:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-adapter-ckan
+    image: publicdataspaces/odc-adapter-ckan
     container_name: odc-adapter-ckan
     volumes:
       - odc-adapter-ckan_repo:/ids/repo
@@ -16,7 +16,7 @@ services:
       - ids_connector
 
   odc-adapter-postgres:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-adapter-postgres
+    image: publicdataspaces/odc-adapter-postgres
     container_name: odc-adapter-postgres
     volumes:
       - odc-adapter-postgres_repo:/ids/repo
@@ -31,7 +31,7 @@ services:
       - ids_connector
 
   odc-config-manager:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-config-manager
+    image: publicdataspaces/odc-config-manager
     volumes:
       - odc-config-manager_repo:/ids/repo
       - /var/run/docker.sock:/var/run/docker.sock
@@ -48,7 +48,7 @@ services:
       - ids_docker
 
   odc-service-docker:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-service-docker
+    image: publicdataspaces/odc-service-docker
     volumes:
       - odc-service-docker_repo:/ids/repo
       - /var/run/docker.sock:/var/run/docker.sock
@@ -72,7 +72,7 @@ services:
       - ids_connector
 
   odc-manager:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-manager
+    image: publicdataspaces/odc-manager
     volumes:
       - odc-manager_repo:/ids/repo
     ports:
@@ -96,7 +96,7 @@ services:
       - ids_connector
 
   odc-frontend:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-frontend
+    image: publicdataspaces/odc-frontend
     ports:
       - 8080:8080
 
