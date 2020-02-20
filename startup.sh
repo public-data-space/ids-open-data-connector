@@ -37,7 +37,7 @@ docker-compose -f $f up -d odc-adapter-postgres
 docker-compose -f $f up -d odc-adapter-ckan
 echo "Adapter apps are initializing..."
 
-docker-compose -f up $f -d odc-manager
+docker-compose -f $f up -d odc-manager
 echo "Manager is starting..."
 
 docker-compose -f $f up -d odc-frontend
