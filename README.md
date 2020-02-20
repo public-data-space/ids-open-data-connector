@@ -5,11 +5,13 @@ The IDS Open Data Connector is a **work in progress**. Please contribute by repo
 
 More information and related projects are available at
 
-https://www.internationaldataspaces.org/
+* https://www.internationaldataspaces.org/
 
-https://www.internationaldataspaces.org/wp-content/uploads/2019/07/Open-Data-Spaces-IDSA.pdf
+* https://www.internationaldataspaces.org/wp-content/uploads/2019/07/Open-Data-Spaces-IDSA.pdf
 
-https://github.com/industrial-data-space/
+* https://www.youtube.com/watch?v=6v-pcnAHh6A
+
+* https://github.com/industrial-data-space/
 
 ## Requirements
 * git
@@ -54,21 +56,21 @@ The -t parameter specifies the wait time between initialisation of important con
 The connector can also be started using docker-compose up -d. However due to initialization times of containers, errors may occur. We therefore recommend using the startup script.
 
 
-### Usage
+## Usage
 * Frontend is available at localhost:8080
 * Username: *admin* Password: *admin*
 * Enter connector configuration via *Konfiguration* first
 
-## Registering a Data Asset
+### Registering a Data Asset
 * Register a DataSource via *Hinzufügen*
 * Example CKAN instance is available at http://ids-backend.fokus.fraunhofer.de/api/3/action
 * Click on the registered DataSource and enter the prompted information
 * Example CKAN resource ID: b7325acb-02a0-4d19-9a13-f5f917036a1e
 
-## Registering to a broker
+### Registering to a broker
 * Register the connector at a broker via *Brokers*
 
-## Managing Apps
+### Managing Apps
 * Apps can be started and stopped via *Apps*
 * The Apps view lists all currently available docker images on the system
 * The docker service trims the urls of the prebuild images but will list locally built images as is
