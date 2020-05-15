@@ -25,8 +25,14 @@ while [ "$1" != "" ]; do
     shift
 done
 
+docker-compose pull
+
 docker-compose -f $f up -d db
 echo "Database is initializing. Sleeping for "${t}" seconds..."
+sleep "${t}"
+
+docker-compose -f $f up -d odc-service-docker
+echo "Docker Service is initializing. Sleeping for "${t}" seconds..."
 sleep "${t}"
 
 docker-compose -f $f up -d odc-config-manager
