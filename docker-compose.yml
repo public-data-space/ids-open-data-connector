@@ -99,6 +99,9 @@ services:
     image: publicdataspaces/odc-frontend
     ports:
       - 8080:8080
+    environment:
+      - VUE_APP_BACKEND_BASE_URL=http://localhost:8090
+      - VUE_APP_CONFIG_MANAGER_BASE_URL=http://localhost:8091
 
 volumes:
   odc-adapter-ckan_repo:
