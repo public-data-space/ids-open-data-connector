@@ -43,6 +43,7 @@ services:
       - SERVICE_PORT=8080
       - DOCKER_SERVICE_PORT=8080
       - DOCKER_SERVICE_HOST=odc-service-docker
+      - API_KEY=yourapikey
     networks:
       - ids_connector
       - ids_docker
@@ -92,6 +93,7 @@ services:
       - CONFIG_MANAGER_PORT=8080
       - INIT=true
       - SERVICE_PORT=8080
+      - CONFIG_MANAGER_API_KEY=yourapikey
     networks:
       - ids_connector
 
@@ -101,7 +103,6 @@ services:
       - 8080:8080
     environment:
       - VUE_APP_BACKEND_BASE_URL=http://localhost:8090
-      - VUE_APP_CONFIG_MANAGER_BASE_URL=http://localhost:8091
 
 volumes:
   odc-adapter-ckan_repo:
