@@ -1,5 +1,15 @@
 version: '3.5'
 services:
+  nginx:
+    build: ./nginx
+    depends_on:
+      - odc-frontend
+      - odc-manager
+    ports:
+      - 80:80
+    networks:
+      - ids_connector
+
   odc-adapter-ckan:
     build: ./adapters/odc-adapter-ckan
     image: odc-adapter-ckan
@@ -76,33 +86,27 @@ services:
     build: ./backend/odc-manager
     volumes:
       - odc-manager_repo:/ids/repo
-    ports:
-      - 8090:8080
+      - ./keystore:/ids/certs
     depends_on:
       - db
     environment:
-      - HOST=db
-      - PORT=5432
-      - DATABASE=ids
-      - USER=ids
-      - PASSWORD=ids
+      - FRONTEND_CONFIG={"username":"admin","password":"admin"}
+      - DB_CONFIG={"host":"db","port":5432,"database":"ids","user":"ids","password":"ids"}
+      - CONFIG_MANAGER_CONFIG={"apikey":"yourapikey", "host":"odc-config-manager","port":8080}
+      - AUTH_CONFIG={"keystorename":"my-keystore.jks", "keystorepassword":"my-password", "keystorealias":"connector-alias","truststorename":"truststore-name","dapsurl":"https://daps.aisec.fraunhofer.de/v2/", "dapsissuer":"https://daps.aisec.fraunhofer.de"}
       - REPOSITORY=/ids/repo/
-      - FRONTEND_ADMIN=admin
-      - FRONTEND_ADMIN_PW=admin
-      - CONFIG_MANAGER_HOST=odc-config-manager
-      - CONFIG_MANAGER_PORT=8080
       - INIT=true
       - SERVICE_PORT=8080
-      - CONFIG_MANAGER_API_KEY=yourapikey
     networks:
       - ids_connector
 
   odc-frontend:
     build: ./frontend/odc-frontend
-    ports:
-      - 8080:8080
     environment:
       - VUE_APP_BACKEND_BASE_URL=http://localhost:8090
+      - VUE_APP_TITLE=IDS Open Data Konnektor
+    networks:
+      - ids_connector
 
 volumes:
   odc-adapter-ckan_repo:
