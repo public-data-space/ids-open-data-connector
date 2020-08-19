@@ -61,13 +61,14 @@ The connector can also be started using docker-compose up -d. However due to ini
 
 
 ## Usage
-* Frontend is available at localhost:8080
+* Frontend is available at localhost/browse
 * Username: *admin* Password: *admin*
 * Enter connector configuration via *Konfiguration* first
 
 ### Registering a Data Asset
 * Register a DataSource via *Hinzufügen*
-* Example CKAN instance is available at http://ids-backend.fokus.fraunhofer.de/api/3/action
+* Example CKAN instance is available at http://ids-backend.fokus.fraunhofer.de/
+* CKAN API URL of the example instance is http://ids-backend.fokus.fraunhofer.de/api/3/action
 * Click on the registered DataSource and enter the prompted information
 * Example CKAN resource ID: b7325acb-02a0-4d19-9a13-f5f917036a1e
 
