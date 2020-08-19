@@ -83,10 +83,10 @@ services:
       - ids_connector
 
   odc-manager:
-    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-service-dockerodc-manager
+    image: dockerhub.fokus.fraunhofer.de:5000/ids/odc-manager
     volumes:
       - odc-manager_repo:/ids/repo
-      - ./keystore:/ids/certs
+      - ./certs:/ids/certs
     depends_on:
       - db
     environment:

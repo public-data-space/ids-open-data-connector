@@ -86,7 +86,7 @@ services:
     build: ./backend/odc-manager
     volumes:
       - odc-manager_repo:/ids/repo
-      - ./keystore:/ids/certs
+      - ./certs:/ids/certs
     depends_on:
       - db
     environment:

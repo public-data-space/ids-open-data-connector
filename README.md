@@ -17,8 +17,12 @@ More information and related projects are available at
 * git
 * docker
 * docker-compose 3.5 or higher
+* DAPS Certificates
 
 ## Starting the Connector
+
+To use the broker valid DAPS certificates are necessary. The certificate needs to be placed in a keystore file. Further a truststore containing, the SSL certficate of the DAPS needs to be available.
+Place those files into a folder named `certs` located in the same folder, als the docker-compose.yml. Alternatively adjust the volume path in the docker-compose to point your keystore/truststore folder.
 
 ### Using prebuild images (recommended)
 
