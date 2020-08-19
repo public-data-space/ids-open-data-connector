@@ -107,7 +107,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      - VUE_APP_BACKEND_BASE_URL=http://localhost:8090
+      - VUE_APP_BACKEND_BASE_URL=http://localhost
       - VUE_APP_TITLE=IDS Open Data Konnektor
     networks:
       - ids_connector
