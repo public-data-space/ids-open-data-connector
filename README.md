@@ -23,6 +23,7 @@ More information and related projects are available at
 
 To use the connector, valid DAPS certificates are necessary. 
 Members of the IDSA can request demo certificates for the DAPS implementation of Fraunhofer AISEC at https://industrialdataspace.jiveon.com/docs/DOC-2002
+
 The certificate needs to be placed in a keystore file. Further a truststore containing the SSL certficate of the DAPS needs to be available.
 
 Place those files into a folder named `certs` located in the same folder as the docker-compose.yml. Alternatively adjust the volume path in the docker-compose to point your keystore/truststore folder.
