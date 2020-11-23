@@ -48,3 +48,6 @@ echo "Manager is starting..."
 
 docker-compose -f $f up -d odc-frontend
 echo "Frontend is starting..."
+
+docker-compose -f $f -f $o -p $p up -d nginx
+echo "Nginx is starting..."
