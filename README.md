@@ -17,12 +17,22 @@ More information and related projects are available at
 * git
 * docker
 * docker-compose 3.5 or higher
-* DAPS Certificates
+* (DAPS Certificates)
 
 ## Starting the Connector
 
-To use the broker valid DAPS certificates are necessary. The certificate needs to be placed in a keystore file. Further a truststore containing, the SSL certficate of the DAPS needs to be available.
-Place those files into a folder named `certs` located in the same folder, als the docker-compose.yml. Alternatively adjust the volume path in the docker-compose to point your keystore/truststore folder.
+To use the connector valid DAPS certificates are recommended but not necessary. 
+Members of the IDSA can request demo certificates for the DAPS implementation of Fraunhofer AISEC at https://industrialdataspace.jiveon.com/docs/DOC-2002
+
+The connector can be started without a valid DAPS certificate. The Connector has three different modes of operating the authentification process: SKIP, IDENTIFY and ENFORCE.
+* In SKIP the connector skips the whole process of cummincation with the DAPS
+* In IDENTIFY the connector does not check incoming messages for valid DAPS tokens, but identifies itself via a token in the response.
+* In ENFORCE the connector enforces DAPS authorization on both ends
+
+The mode can be specified as an environment variable for the odc-manager service. This can be done in the docker-compose file.
+
+If a certificate is available it needs to be placed in a keystore file. Further a truststore containing, the SSL certficate of the DAPS needs to be available.
+Place those files into a folder named `certs` located in the same folder, as the docker-compose.yml. Alternatively adjust the volume path in the docker-compose to point to your keystore/truststore folder.
 
 ### Using prebuild images (recommended)
 
@@ -50,7 +60,6 @@ Follow the instructions in the readme files of the individual components project
 
 #### Starting the connector
 
-The setup.sh will automatically boot the connector after setup.
 To start the connector manually run:
 
 ```sh startup.sh -f docker-compose_build.yml [-t]``` 

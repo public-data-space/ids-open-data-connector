@@ -45,8 +45,6 @@ services:
     volumes:
       - odc-config-manager_repo:/ids/repo
       - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - 8091:8080
     environment:
       - REPOSITORY=/ids/repo/
       - INIT=true
@@ -93,7 +91,7 @@ services:
       - FRONTEND_CONFIG={"username":"admin","password":"admin"}
       - DB_CONFIG={"host":"db","port":5432,"database":"ids","user":"ids","password":"ids"}
       - CONFIG_MANAGER_CONFIG={"apikey":"yourapikey", "host":"odc-config-manager","port":8080}
-      - AUTH_CONFIG={"keystorename":"my-keystore.jks", "keystorepassword":"my-password", "keystorealias":"connector-alias","truststorename":"truststore-name","dapsurl":"https://daps.aisec.fraunhofer.de/v2/", "dapsissuer":"https://daps.aisec.fraunhofer.de"}
+      - AUTH_CONFIG={"mode":"skip","keystorename":"my-keystore.jks", "keystorepassword":"my-password", "keystorealias":"connector-alias","truststorename":"truststore-name","dapsurl":"https://daps.aisec.fraunhofer.de/v2/", "dapsissuer":"https://daps.aisec.fraunhofer.de"}
       - REPOSITORY=/ids/repo/
       - INIT=true
       - SERVICE_PORT=8080
