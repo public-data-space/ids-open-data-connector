@@ -60,6 +60,7 @@ Follow the instructions in the readme files of the individual components project
 
 #### Starting the connector
 
+The setup.sh will automatically boot the connector after setup.
 To start the connector manually run:
 
 ```sh startup.sh -f docker-compose_build.yml [-t]``` 
